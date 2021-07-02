@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 2c78ab6a4476fa741826fb353fbd7ea4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - weaponData: {instanceID: 0}
+  - weaponUI: {instanceID: 0}
+  - rayProvider: {instanceID: 0}
+  - netRequest: {instanceID: 0}
+  - _soFactory: {fileID: 11400000, guid: 361c80672714ef645b8bfd7a3bef42e8, type: 2}
+  - _projectionMaterial: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
