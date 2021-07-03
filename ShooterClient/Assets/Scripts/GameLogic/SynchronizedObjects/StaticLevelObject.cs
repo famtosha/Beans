@@ -9,6 +9,8 @@ public class StaticLevelObject : MonoBehaviour, ISynchronizedObject
 
     protected SynchronizedObjectList _synchronizedObjectList;
 
+    public SynchronizedObjectList synchronizedObjectList => _synchronizedObjectList;
+
     protected virtual void Awake()
     {
         _synchronizedObjectList = FindObjectOfType<SynchronizedObjectList>();

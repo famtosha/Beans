@@ -1,6 +1,6 @@
 # Beans  
 
-## Unity version: 2019.4.23f1
+## Unity version: 2019.4.23f1  
 
 ## ToDo:  
 
@@ -10,13 +10,11 @@
 - Dynamic weapon visual
 - Weapons with missile
 
-### Map system:
-+ Dynamic map load
-- One map instance for client and server
+### Map system:  
+~ One map instance for client and server
 
 ### Visual:  
 - IK for arms with item
 
 ### AI:  
 - Move Pig AI to state machine
-- Change Client Pig from inheritance to composition

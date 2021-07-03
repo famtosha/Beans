@@ -14,13 +14,7 @@ public class AnotherPlayerBehaviour : MonoBehaviour
     public GameObject damageSign;
     public MeshRenderer mesh;
 
-    private Vector3 lastPlayerPosition;
-    private Vector3 nextPlayerPosition;
-
-    private Quaternion lastPlayerRoatation;
-    private Quaternion nextPlayerRotation;
-
-    private float t = 0;
+    private NetworkObjectInterpolation _interpolation = new NetworkObjectInterpolation(0.1f);
 
     public void Shoot(Vector3[] hits)
     {
@@ -37,30 +31,9 @@ public class AnotherPlayerBehaviour : MonoBehaviour
         guns.ChangeActiveWeapon(weaponID);
     }
 
-    public void ForceMove(Vector3 newPostion, Quaternion newRotaion)
-    {
-        playerBodyPosition.transform.position = newPostion;
-        playerBodyRotation.transform.rotation = newRotaion;
-
-        lastPlayerPosition = newPostion;
-        nextPlayerPosition = newPostion;
-
-        lastPlayerRoatation = newRotaion;
-        nextPlayerRotation = newRotaion;
-    }
-
     public void Move(Vector3 newPosition, Quaternion newRotation)
     {
-        playerBodyPosition.transform.position = newPosition;
-        playerBodyRotation.transform.rotation = newRotation;
-
-        lastPlayerPosition = nextPlayerPosition;
-        nextPlayerPosition = newPosition;
-
-        lastPlayerRoatation = nextPlayerRotation;
-        nextPlayerRotation = newRotation;
-
-        t = 0;
+        _interpolation.UpdatePosition(newPosition, newRotation);
     }
 
     public void ChangeName(string name)
@@ -70,9 +43,9 @@ public class AnotherPlayerBehaviour : MonoBehaviour
 
     public void Update()
     {
-        t += Time.deltaTime;
-        playerBodyPosition.transform.position = Vector3.Lerp(lastPlayerPosition, nextPlayerPosition, t / sendCD);
-        playerBodyRotation.transform.rotation = Quaternion.Slerp(lastPlayerRoatation, nextPlayerRotation, t / sendCD);
+        _interpolation.UpdateT();
+        playerBodyPosition.transform.position = _interpolation.GetCurrentPosition();
+        playerBodyRotation.transform.rotation = _interpolation.GetCurrentRotation();
     }
 
     public void ShowDamage(int damage)
