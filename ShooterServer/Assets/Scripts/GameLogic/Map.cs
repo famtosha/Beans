@@ -1,17 +1,26 @@
 ﻿using UnityEngine;
+using Zenject;
 
 public class Map : MonoBehaviour
 {
-    public MapData startMap;
-    public SynchronizedObjectList objectList;
+    public MapData currentMap { get; set; }
+    public SynchronizedObjectList objectList { get; set; }
+
     [SerializeField] private SynchronizedObjectsFacotry _factory;
-    private MapData currentMap;
+    [SerializeField] private MapData _startMap;
     private GameObject _rootObject;
+    private ServerBehaviour _server;
+
+    [Inject]
+    private void Construct(ServerBehaviour serverBehaviour)
+    {
+        _server = serverBehaviour;
+    }
 
     private void Start()
     {
         SpawnMap();
-        objectList = new SynchronizedObjectList(FindObjectOfType<ServerBehaviour>().server, _rootObject, _factory);
+        objectList = new SynchronizedObjectList(_server.server, _rootObject, _factory);
     }
 
     public Vector3 GetSpawnPoint()
@@ -22,7 +31,7 @@ public class Map : MonoBehaviour
 
     private void SpawnMap()
     {
-        currentMap = ScriptableObject.Instantiate(startMap);
+        currentMap = ScriptableObject.Instantiate(_startMap);
         _rootObject = Instantiate(currentMap.prefub);
     }
 }

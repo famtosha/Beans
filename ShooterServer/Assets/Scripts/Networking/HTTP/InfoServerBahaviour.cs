@@ -5,32 +5,39 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 public class InfoServerBahaviour : MonoBehaviour
 {
     public int port;
-    public TcpListener infoServer;
-    public Server gameServer;
+
+    private ServerBehaviour _gameServer;
+    private TcpListener _infoServer;
+
+    [Inject]
+    private void Construct(ServerBehaviour gameServerBehaviour)
+    {
+        _gameServer = gameServerBehaviour;
+    }
 
     private async void Start()
     {
-        gameServer = FindObjectOfType<ServerBehaviour>().server;
-        infoServer = TcpListener.Create(port);
-        infoServer.Start();
+        _infoServer = TcpListener.Create(port);
+        _infoServer.Start();
         GetRequest();
         Debug.Log("Info server started");
     }
 
     private void OnDestroy()
     {
-        infoServer.Stop();
+        _infoServer.Stop();
     }
 
     private async void GetRequest()
     {
         try
         {
-            var client = await infoServer.AcceptTcpClientAsync();
+            var client = await _infoServer.AcceptTcpClientAsync();
             Answer(client);
         }
         catch { }
@@ -38,13 +45,13 @@ public class InfoServerBahaviour : MonoBehaviour
 
     private void Answer(TcpClient client)
     {
-        Debug.Log($"Server info sended to :{client.Client.RemoteEndPoint}");
-        var answer = new ServerInfo(gameServer.maxPlayers, gameServer.players.GetPlayerCount(), 0);
+        var answer = new ServerInfo(_gameServer.server.maxPlayers, _gameServer.server.players.GetPlayerCount(), _gameServer.server.map.currentMap.mapID);
         var jsonAnswer = JsonUtility.ToJson(answer);
         var byteAnswer = Encoding.UTF8.GetBytes(jsonAnswer);
 
         client.GetStream().WriteBytes(byteAnswer);
         client.Close();
         GetRequest();
+        Debug.Log($"Server info sended to :{client.Client.RemoteEndPoint}");
     }
 }

@@ -1,21 +1,28 @@
 ﻿using System;
 using UnityEngine;
+using Zenject;
 
 public class ServerBehaviour : MonoBehaviour
 {
-    public ClientAccepter clientAccepter;
-    public SynchronizedObjectList synchronizedObjectList;
-    public Map map;
-    public Server server;
-    public int port;
+    public Server server { get; set; }
+
+    [SerializeField] private int port;
+    private ClientAccepter _clientAccepter;
+    private Map _map;
+
+    [Inject]
+    private void Construct(Map map)
+    {
+        _map = map;
+    }
 
     private void Awake()
     {
         try
         {
-            server = new Server(port, clientAccepter, map);
-            clientAccepter.acceptCallback = server.ConnectClient;
-            clientAccepter.StartListening();
+            server = new Server(port, _map);
+            _clientAccepter = new ClientAccepter(server, server.ConnectClient);
+            _clientAccepter.StartListening();
             Log.Write($"Server started at port: {port}");
         }
         catch (Exception ex)

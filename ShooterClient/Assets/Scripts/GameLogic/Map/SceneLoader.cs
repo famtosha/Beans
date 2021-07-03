@@ -8,6 +8,7 @@ public class SceneLoader : MonoBehaviour
 
     private static IPEndPoint serverIP;
     private static string playerName;
+    private static int mapID;
 
     public int menu;
     public int game;
@@ -27,18 +28,15 @@ public class SceneLoader : MonoBehaviour
         if (newScene.buildIndex == game)
         {
             FindObjectOfType<ClientBehaviour>().ConnectToServer(serverIP, playerName);
-        }
-
-        if (newScene.buildIndex == menu)
-        {
-
+            FindObjectOfType<MapLoader>().LoadMap(mapID);
         }
     }
 
-    public void LoadGameScene(IPEndPoint serverIP, string playerName)
+    public void LoadGameScene(IPEndPoint serverIP, string playerName, int mapID)
     {
         SceneLoader.serverIP = serverIP;
         SceneLoader.playerName = playerName;
+        SceneLoader.mapID = mapID;
         SceneManager.LoadScene(game);
     }
 

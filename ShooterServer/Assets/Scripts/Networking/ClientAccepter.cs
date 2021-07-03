@@ -3,20 +3,26 @@ using UnityEngine;
 using System.Net.Sockets;
 using System;
 
-public class ClientAccepter : MonoBehaviour
+public class ClientAccepter
 {
-    public ServerBehaviour server;
-    public Action<TcpClient> acceptCallback;
+    private Server _server;
+    private Action<TcpClient> _acceptCallback;
+
+    public ClientAccepter(Server server, Action<TcpClient> acceptCallback)
+    {
+        _server = server;
+        _acceptCallback = acceptCallback;
+    }
 
     public async void StartListening()
     {
-        var client = await server.server.server.AcceptTcpClientAsync();
+        var client = await _server.tcpServer.AcceptTcpClientAsync();
         AcceptClient(client);
     }
 
     public void AcceptClient(TcpClient client)
     {
-        acceptCallback(client);
+        _acceptCallback(client);
         StartListening();
     }
 }

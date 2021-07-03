@@ -18,7 +18,10 @@ public class MainMenuUI : MonoBehaviour
         if (TryParseIPWithLog(out var ip))
         {
             ip.Port++;
-            if (InfoServerRequester.TryGetServerInfo(ip, out _)) SceneLoader.instance.LoadGameScene(ip, nameField.text);
+            if (InfoServerRequester.TryGetServerInfo(ip, out var serverData))
+            {
+                SceneLoader.instance.LoadGameScene(ip, nameField.text, serverData.mapID);
+            }
             ip.Port--;
         }
         else

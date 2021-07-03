@@ -4,7 +4,7 @@ using System.Net.Sockets;
 using UnityEngine;
 
 public static class InfoServerRequester
-{
+{   
     public static bool TryGetServerInfo(IPEndPoint server, out ServerInfo info)
     {
         try

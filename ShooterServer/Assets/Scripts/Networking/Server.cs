@@ -10,8 +10,7 @@ public class Server
     public int port;
     public int maxPlayers = 32;
     public PacketHandler[] packetHandlers = new PacketHandler[128];
-    public TcpListener server;
-    public ClientAccepter clientAccepter;
+    public TcpListener tcpServer;
     public PlayerList players;
 
     public static float dynamicObjectUpdateRate = 0.1f;
@@ -20,16 +19,16 @@ public class Server
     public event Action<Client> ClientDisconnecting;
 
     private Map _map;
+    public Map map => _map;
 
-    public Server(int port, ClientAccepter clientAccepter, Map map)
+    public Server(int port, Map map)
     {
         this.port = port;
         _map = map;
-        this.clientAccepter = clientAccepter;
         this.players = new PlayerList(maxPlayers, HandleNetworkException, _map);
 
-        server = TcpListener.Create(port);
-        server.Start();
+        tcpServer = TcpListener.Create(port);
+        tcpServer.Start();
 
         packetHandlers[Packet.ChangeName].PacketHandled += NameChanged;
         packetHandlers[Packet.Move].PacketHandled += PositionUpdated;
@@ -44,7 +43,7 @@ public class Server
 
     public void Stop()
     {
-        server.Stop();
+        tcpServer.Stop();
     }
 
     public void ReadPackets()

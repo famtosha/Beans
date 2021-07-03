@@ -8,9 +8,10 @@
 - Changable weapon
 - Client side inventory
 - Dynamic weapon visual
+- Weapons with missile
 
 ### Map system:
-- Dynamic map load
++ Dynamic map load
 - One map instance for client and server
 
 ### Visual:  
