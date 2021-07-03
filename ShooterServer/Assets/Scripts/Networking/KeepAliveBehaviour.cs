@@ -4,8 +4,7 @@ using Zenject;
 
 public class KeepAliveBehaviour : MonoBehaviour
 {
-    public Timer checkCD = new Timer(5);
-
+    [SerializeField] private Timer _checkCD = new Timer(5);
     private ServerBehaviour _server;
 
     [Inject]
@@ -16,7 +15,7 @@ public class KeepAliveBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (checkCD.isReady)
+        if (_checkCD.isReady)
         {
             foreach (var client in _server.server.players.players)
             {
@@ -25,7 +24,7 @@ public class KeepAliveBehaviour : MonoBehaviour
                     client.WritePacket(new KeepAlivePacket());
                 }
             }
-            checkCD.Reset();
+            _checkCD.Reset();
         }
     }
 }

@@ -19,6 +19,4 @@ namespace PacketManager
             }
         }
     }
-
-    public delegate void PacketHandled(Client sender, ITCPPacket packet);
 }

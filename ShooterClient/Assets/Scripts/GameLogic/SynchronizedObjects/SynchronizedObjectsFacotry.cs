@@ -11,7 +11,6 @@ public class SynchronizedObjectsFacotry : ScriptableObject, ISynchronizedObjects
     public ISynchronizedObject Create(int assetID)
     {
         var clone = Instantiate(assets[assetID], Vector3.zero, Quaternion.identity).GetComponent<ISynchronizedObject>();
-        clone.assetID = assetID;
         return clone;
     }
 }

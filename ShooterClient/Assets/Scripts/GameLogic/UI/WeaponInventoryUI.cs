@@ -8,7 +8,7 @@ public class WeaponInventoryUI : MonoBehaviour
 
     public void UpdateAmmoInfo(string ammo)
     {
-        weaponAmmo.text = ammo;
+        weaponName.text = ammo;
     }
 
     public void UpdateNameInfo(string name)

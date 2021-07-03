@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Pistol : Weapon<PistolData>
+public class Pistol : Weapon<WeaponData>
 {
     public override void Shoot()
     {

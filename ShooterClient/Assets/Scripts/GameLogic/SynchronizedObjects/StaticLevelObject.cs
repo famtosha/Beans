@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class StaticLevelObject : MonoBehaviour, ISynchronizedObject
 {
-    public int assetID { get; set; }
+    [SerializeField] private int _assetID;
+    public int assetID { get => _assetID; set => _assetID = value; }
     public int objectID { get; set; }
 
     protected SynchronizedObjectList _synchronizedObjectList;

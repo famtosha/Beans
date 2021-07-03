@@ -4,6 +4,8 @@ using System.Linq;
 using UnityEngine.AI;
 
 [SelectionBase]
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(DynamicLevelObject))]
 public class Pig : MonoBehaviour
 {
     [SerializeField] private float _minDestinationDistance;
@@ -12,13 +14,11 @@ public class Pig : MonoBehaviour
     [SerializeField] private float _maxMoveDistance;
 
     private NavMeshAgent _pathFinder;
-    private DynamicLevelObject _levelObject;
     private Queue<Vector3> _pathQueue = new Queue<Vector3>();
 
     private void Start()
     {
         _pathFinder = GetComponent<NavMeshAgent>();
-        _levelObject = GetComponent<DynamicLevelObject>();
     }
 
     private void Update()

@@ -7,28 +7,28 @@ using System.Text;
 
 public class InfoServer
 {
-    public int port;
-    public TcpListener infoServer;
-    public Server gameServer;
+    private int _port;
+    private TcpListener _infoServer;
+    private Server _gameServer;
 
     public InfoServer(int port, Server gameServer)
     {
-        this.port = port;
-        this.gameServer = gameServer;
-        infoServer = TcpListener.Create(port);
-        infoServer.Start();
+        _port = port;
+        _gameServer = gameServer;
+        _infoServer = TcpListener.Create(_port);
+        _infoServer.Start();
         WaitRequest();
     }
 
     ~InfoServer()
     {
-        infoServer.Stop();
+        _infoServer.Stop();
     }
 
     private void Answer(TcpClient client)
     {
         Debug.Log($"connected to info server:{client.Client.RemoteEndPoint}");
-        var answer = new ServerInfo(gameServer.maxPlayers, gameServer.players.players.Length, 0);
+        var answer = new ServerInfo(_gameServer.maxPlayers, _gameServer.players.players.Length, 0);
         var jsonAnswer = JsonUtility.ToJson(answer);
         Debug.Log("Info:" + jsonAnswer);
         var byteAnswer = Encoding.UTF8.GetBytes(jsonAnswer);
@@ -40,14 +40,14 @@ public class InfoServer
 
     private void AnswerRequiest(IAsyncResult result)
     {
-        var context = infoServer.EndAcceptTcpClient(result);
+        var context = _infoServer.EndAcceptTcpClient(result);
         Answer(context);
         WaitRequest();
     }
 
     private void WaitRequest()
     {
-        infoServer.BeginAcceptTcpClient(AnswerRequiest, null);
+        _infoServer.BeginAcceptTcpClient(AnswerRequiest, null);
         Debug.Log("Listening...");
     }
 }

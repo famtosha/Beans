@@ -8,12 +8,12 @@ namespace PacketManager
     {
         public StreamWrapper stream;
         public ITCPPacket[] packets = new ITCPPacket[128];
-        private Action<Exception> failCallback;
+        private Action<Exception> _failCallback;
 
         public PacketReader(StreamWrapper stream, Action<Exception> failCallback)
         {
             this.stream = stream;
-            this.failCallback = failCallback;
+            _failCallback = failCallback;
             AddPackets();
         }
 
@@ -59,7 +59,7 @@ namespace PacketManager
             }
             catch (Exception ex)
             {
-                failCallback(ex);
+                _failCallback(ex);
                 packet = null;
                 return false;
             }

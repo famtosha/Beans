@@ -4,7 +4,7 @@ using Zenject;
 
 public class PlayerPostionUpdater : MonoBehaviour
 {
-    public Timer sendCD = new Timer(0.5f);
+    [SerializeField] private Timer _sendCD = new Timer(0.5f);
     private ServerBehaviour _server;
 
     private void Start()
@@ -14,11 +14,11 @@ public class PlayerPostionUpdater : MonoBehaviour
 
     private void Update()
     {
-        sendCD.UpdateTimer(Time.deltaTime);
-        if (sendCD.isReady)
+        _sendCD.UpdateTimer(Time.deltaTime);
+        if (_sendCD.isReady)
         {
             SendNewPosition();
-            sendCD.Reset();
+            _sendCD.Reset();
         }
     }
 

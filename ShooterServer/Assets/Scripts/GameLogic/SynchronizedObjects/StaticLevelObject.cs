@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using PacketManager;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class StaticLevelObject : MonoBehaviour, ISynchronizedObject
     public int assetID { get => _assetID; set => _assetID = value; }
 
     protected SynchronizedObjectList _sol;
+    public SynchronizedObjectList sol => _sol;
 
     protected virtual void Start()
     {
@@ -18,6 +20,11 @@ public class StaticLevelObject : MonoBehaviour, ISynchronizedObject
     public void InitSynchronizedObject(byte[] data)
     {
 
+    }
+
+    public void DestoryByServer()
+    {
+        _sol.DestroySynchronizedObjectByServer(objectID);
     }
 
     public void DestroySynchronizedObject()
@@ -35,6 +42,7 @@ public class StaticLevelObject : MonoBehaviour, ISynchronizedObject
             GetObjectData(stream);
             return stream.ToArray();
         }
+
     }
 
     protected virtual void GetObjectData(MemoryStream stream)

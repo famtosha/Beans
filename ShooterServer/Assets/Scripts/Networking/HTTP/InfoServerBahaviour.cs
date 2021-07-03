@@ -9,7 +9,7 @@ using Zenject;
 
 public class InfoServerBahaviour : MonoBehaviour
 {
-    public int port;
+    [SerializeField] private int _port = 6668;
 
     private ServerBehaviour _gameServer;
     private TcpListener _infoServer;
@@ -20,9 +20,9 @@ public class InfoServerBahaviour : MonoBehaviour
         _gameServer = gameServerBehaviour;
     }
 
-    private async void Start()
+    private void Start()
     {
-        _infoServer = TcpListener.Create(port);
+        _infoServer = TcpListener.Create(_port);
         _infoServer.Start();
         GetRequest();
         Debug.Log("Info server started");

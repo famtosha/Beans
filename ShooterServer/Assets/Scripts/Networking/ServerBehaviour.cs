@@ -6,7 +6,7 @@ public class ServerBehaviour : MonoBehaviour
 {
     public Server server { get; set; }
 
-    [SerializeField] private int port;
+    [SerializeField] private int _port = 6667;
     private ClientAccepter _clientAccepter;
     private Map _map;
 
@@ -20,10 +20,10 @@ public class ServerBehaviour : MonoBehaviour
     {
         try
         {
-            server = new Server(port, _map);
+            server = new Server(_port, _map);
             _clientAccepter = new ClientAccepter(server, server.ConnectClient);
             _clientAccepter.StartListening();
-            Log.Write($"Server started at port: {port}");
+            Log.Write($"Server started at port: {_port}");
         }
         catch (Exception ex)
         {

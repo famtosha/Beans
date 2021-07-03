@@ -487,7 +487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b29fa8bae324f6419a991543fbd8272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _synchronizedObjectList: {fileID: 0}
+  _assetID: 3
 --- !u!1 &4930535948112810281
 GameObject:
   m_ObjectHideFlags: 0

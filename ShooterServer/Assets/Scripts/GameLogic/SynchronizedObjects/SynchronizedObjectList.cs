@@ -84,6 +84,12 @@ public class SynchronizedObjectList : ISynchronizedObjectList
         _server.players.players.ForeachExpect(x => x.WritePacket(packet), sender.id);
     }
 
+    public void DestroySynchronizedObjectByServer(int id)
+    {
+        DestroySynchronizedObject(id);
+        _server.players.players.Foreach(x => x.WritePacket(new DespawnSynchronizedObjectPacket(id)));
+    }
+
     public void DestroySynchronizedObject(int synchronizedObjectID)
     {
         if (!synchronizedObjects.ContainsKey(synchronizedObjectID)) return;
