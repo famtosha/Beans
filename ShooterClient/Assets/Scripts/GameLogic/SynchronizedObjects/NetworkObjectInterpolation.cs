@@ -2,11 +2,11 @@
 
 public class NetworkObjectInterpolation
 {
-    private Vector3 _prevPosition1;
-    private Quaternion _prevRotation1;
+    private Vector3 _prevPosition1 = Vector3.zero;
+    private Quaternion _prevRotation1 = Quaternion.identity;
 
-    private Vector3 _prevPosition2;
-    private Quaternion _prevRotation2;
+    private Vector3 _prevPosition2 = Vector3.zero;
+    private Quaternion _prevRotation2 = Quaternion.identity;
 
     private float _sendCD;
     private float _t;

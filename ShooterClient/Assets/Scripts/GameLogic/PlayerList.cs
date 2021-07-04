@@ -57,7 +57,6 @@ public class PlayerList : MonoBehaviour
         {
             var clientGameObject = Instantiate(anotherPlayerPrefub);
             var anotherPlayer = clientGameObject.GetComponentInChildren<AnotherPlayerBehaviour>();
-            anotherPlayer.sendCD = sendCD;
             anotherPlayer.id = spawnPacket.playerID;
             anotherPlayer.ChangeName(spawnPacket.playerName);
             players[anotherPlayer.id] = anotherPlayer;

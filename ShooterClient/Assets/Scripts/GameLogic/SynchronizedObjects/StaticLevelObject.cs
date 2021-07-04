@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using PacketManager;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ public class StaticLevelObject : MonoBehaviour, ISynchronizedObject
 
     public SynchronizedObjectList synchronizedObjectList => _synchronizedObjectList;
 
+    public event Action Destroyed;
+
     protected virtual void Awake()
     {
         _synchronizedObjectList = FindObjectOfType<SynchronizedObjectList>();
@@ -24,6 +27,7 @@ public class StaticLevelObject : MonoBehaviour, ISynchronizedObject
 
     public void DestroySynchronizedObject()
     {
+        Destroyed?.Invoke();
         Destroy(gameObject);
     }
 

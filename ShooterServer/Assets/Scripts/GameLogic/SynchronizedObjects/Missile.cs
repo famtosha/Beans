@@ -10,6 +10,8 @@ public class Missile : MonoBehaviour
     [SerializeField] private float _radius;
     [SerializeField] private float _damage;
 
+    private bool _isExploded = false;
+
     private DynamicLevelObject _dynamicLevelObject;
 
     private void Awake()
@@ -27,7 +29,7 @@ public class Missile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Explode();
+        if(!_isExploded) Explode();
     }
 
     private void Move()
@@ -37,24 +39,35 @@ public class Missile : MonoBehaviour
 
     private void Explode()
     {
-        //var explosionPosition = transform.position;
-        //var nearObjects = Physics.OverlapSphere(explosionPosition, _radius)
-        //    .Select(x => x.GetComponent<ClientBehaviour>())
-        //    .Where(x => x != null)
-        //    .Where(x => CanSeeObject(explosionPosition, x.transform))
-        //    .ToList();
+        _isExploded = true;
+           var explosionPosition = transform.position;
+        Physics.OverlapSphere(explosionPosition, _radius)
+            .Where(x => CanSeeObject(explosionPosition, x.transform.position))
+            .Select(x => x.GetComponent<IDamagable>())
+            .Where(x => x != null)
+            .ToList()
+            .ForEach(x => x.ApplyDamage(1));
+
         var players = FindObjectOfType<ServerBehaviour>().server.players;
         foreach (var player in players.players)
         {
             if (player == null) continue;
-
-            var distance = Vector3.Distance(transform.position, player.position);
-            if (distance > _radius) continue;
-            int damage = Mathf.RoundToInt(_damage - distance);
-
-            players.DealDamage(0, player.id, damage);
+            if (CalculateDamage(player.position, out var damage))
+            {
+                players.DealDamage(0, player.id, damage);
+            }
         }
+
         _dynamicLevelObject.DestoryByServer();
+    }
+
+    private bool CalculateDamage(Vector3 targetPosition, out int damage)
+    {
+        var distance = Vector3.Distance(transform.position, targetPosition);
+        damage = Mathf.RoundToInt(_damage - distance);
+        if (distance > _radius) damage = 0;
+        damage = Mathf.Clamp(damage, 0, damage);
+        return damage > 0;
     }
 
     private bool CanSeeObject(Vector3 source, Vector3 target)

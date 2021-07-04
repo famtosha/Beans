@@ -43,5 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea9f12cd1960421468b2104213bc55f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sendCD:
+  _sendCD:
     cd: 0.1

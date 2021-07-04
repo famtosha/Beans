@@ -3,10 +3,10 @@ using UnityEngine;
 
 public static class GameObjectExtentions
 {
-    public static bool HasComponent<T>(this GameObject gameObject) where T : Component
+    public static bool HasComponent<T>(this GameObject gameObject)
     {
         bool result = false;
-        if (gameObject.GetComponent<T>()) result = true;
+        if (gameObject.GetComponent<T>() != null) result = true;
         return result;
     }
 

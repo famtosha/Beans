@@ -373,6 +373,7 @@ GameObject:
   - component: {fileID: 9095083404583659629}
   - component: {fileID: 6292784496488482054}
   - component: {fileID: 1894760521204902059}
+  - component: {fileID: 6008214597774531665}
   m_Layer: 8
   m_Name: Pig
   m_TagString: Untagged
@@ -488,6 +489,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _assetID: 3
+--- !u!114 &6008214597774531665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4422202094076800027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65cb7f5c0763849469cfc3ff2afc5b92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destroyParticle: {fileID: 4997401080190105600, guid: adcf4c2c36b2a09469349f2dd688bff9,
+    type: 3}
 --- !u!1 &4930535948112810281
 GameObject:
   m_ObjectHideFlags: 0

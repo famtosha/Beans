@@ -6,24 +6,31 @@ using UnityEngine.AI;
 [SelectionBase]
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(DynamicLevelObject))]
-public class Pig : MonoBehaviour
+public class Pig : MonoBehaviour, IDamagable
 {
     [SerializeField] private float _minDestinationDistance;
     [SerializeField] private float _speed;
     [SerializeField] private Timer _moveCD;
     [SerializeField] private float _maxMoveDistance;
 
+    private DynamicLevelObject _levelObject;
     private NavMeshAgent _pathFinder;
     private Queue<Vector3> _pathQueue = new Queue<Vector3>();
 
     private void Start()
     {
         _pathFinder = GetComponent<NavMeshAgent>();
+        _levelObject = GetComponent<DynamicLevelObject>();
     }
 
     private void Update()
     {
         MoveUpdate();
+    }
+
+    public void ApplyDamage(int damage)
+    {
+        _levelObject.DestoryByServer();
     }
 
     private bool TryGetCurrentDistanation(out Vector3 position)
@@ -87,7 +94,7 @@ public class Pig : MonoBehaviour
     private Vector3 GetNewDestanation()
     {
         var randomVector = MathHelper.RandomVector2(_maxMoveDistance);
-        var point = new Vector3(randomVector.x, transform.position.y, randomVector.y);
+        var point = new Vector3(randomVector.x, transform.position.y, randomVector.y) + transform.position;
         if (Physics.Raycast(point, -Vector3.up, out RaycastHit hit, 10))
         {
             return hit.point;

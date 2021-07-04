@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 7231661515907151569}
   - component: {fileID: 795330979386919585}
   m_Layer: 0
-  m_Name: CubeCreator
+  m_Name: Creator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,7 +172,7 @@ MonoBehaviour:
   weaponUI: {fileID: 795330979386919585}
   rayProvider: {fileID: 0}
   netRequest: {fileID: 6412985206310010727}
-  _soFactory: {fileID: 11400000, guid: 361c80672714ef645b8bfd7a3bef42e8, type: 2}
+  _soFactory: {fileID: 11400000, guid: 88d3dd2b445c1ef4eb0ba975db70f088, type: 2}
   _projectionMaterial: {fileID: 2100000, guid: a29ef64973e346b4a83f1985d2bcda16, type: 2}
 --- !u!114 &795330979386919585
 MonoBehaviour:

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class AnotherPlayerBehaviour : MonoBehaviour
 {
     public int id;
-    public float sendCD = 0.05f;
 
     public Transform playerBodyPosition;
     public Transform playerBodyRotation;

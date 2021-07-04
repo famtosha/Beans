@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 8130316664458808386}
   - component: {fileID: 8130316664458808387}
   - component: {fileID: 8130316664458808388}
+  - component: {fileID: -2839193493607585420}
   m_Layer: 12
   m_Name: Window
   m_TagString: Untagged
@@ -150,5 +151,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ecec061f7bb9840be91b10dd749506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particlePrefub: {fileID: 2328713938970394801, guid: 8af9cbad848bf2742acbbe8fc3f1fc9f,
+  _assetID: 0
+--- !u!114 &-2839193493607585420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8130316664458808389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65cb7f5c0763849469cfc3ff2afc5b92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destroyParticle: {fileID: 2328713938970394801, guid: 8af9cbad848bf2742acbbe8fc3f1fc9f,
     type: 3}

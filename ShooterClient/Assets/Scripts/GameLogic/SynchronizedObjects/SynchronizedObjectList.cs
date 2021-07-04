@@ -54,6 +54,7 @@ public class SynchronizedObjectList : MonoBehaviour, ISynchronizedObjectList
 
     public void DestroySynchronizedObjectByServer(int synchronizedObjectID)
     {
+        Debug.Log($"Destroyed objectID: {synchronizedObjectID} AssetID: {synchronizedObjects.TryGetValue(synchronizedObjectID, out var obj)},{obj.assetID}");
         synchronizedObjects[synchronizedObjectID].DestroySynchronizedObject();
         synchronizedObjects.Remove(synchronizedObjectID);
     }
@@ -61,6 +62,7 @@ public class SynchronizedObjectList : MonoBehaviour, ISynchronizedObjectList
     public void DestroySynchronizedObjectByClient(int synchronizedObjectID)
     {
         client.WritePacket(new DespawnSynchronizedObjectPacket(synchronizedObjectID));
+        Debug.Log($"Destroyed objectID: {synchronizedObjectID} AssetID: {synchronizedObjects.TryGetValue(synchronizedObjectID,out var obj)},{obj.assetID}");
         synchronizedObjects[synchronizedObjectID].DestroySynchronizedObject();
         synchronizedObjects.Remove(synchronizedObjectID);
     }

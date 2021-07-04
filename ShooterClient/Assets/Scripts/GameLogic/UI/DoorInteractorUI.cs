@@ -7,7 +7,7 @@ public class DoorInteractorUI : MonoBehaviour
 
     public void ShowInfo()
     {
-        _info.text = "Open";
+        _info.text = "[E]";
     }
 
     public void HideInfo()
