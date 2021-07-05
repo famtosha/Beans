@@ -17,3 +17,6 @@
 
 ### AI:  
 - Move Pig AI to state machine
+
+### Server:
+- PlayerBehaviour must exist in the scene for collision

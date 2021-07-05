@@ -99,6 +99,7 @@ public class CubeCreator : Weapon<WeaponData>
             {
                 mat.material = _projectionMaterial;
             }
+            if (_objectProjection.TryGetComponent<NetworkObjectDestoryAction>(out var p)) Destroy(p);
             var components = _objectProjection.GetComponentsInChildren<Component>().ToList();
             components = components.Where(x => !(x is MeshFilter || x is MeshRenderer || x is Transform)).ToList();
             components.ForEach(x => Destroy(x));
