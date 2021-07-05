@@ -3,12 +3,15 @@ using UnityEngine;
 using Zenject;
 
 [RequireComponent(typeof(DynamicLevelObject))]
+[RequireComponent(typeof(Rigidbody))]
 public class Missile : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _selfExplodeDelay;
     [SerializeField] private float _radius;
     [SerializeField] private float _damage;
+
+    private Rigidbody _rb;
 
     private bool _isExploded = false;
 
@@ -17,30 +20,26 @@ public class Missile : MonoBehaviour
     private void Awake()
     {
         _dynamicLevelObject = GetComponent<DynamicLevelObject>();
+        _rb = GetComponent<Rigidbody>();
         transform.Rotate(90, 0, 0);
+        _rb.AddForce(transform.up * _speed);
     }
 
     private void Update()
     {
         _selfExplodeDelay -= Time.deltaTime;
-        Move();
         if (_selfExplodeDelay < 0) Explode();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(!_isExploded) Explode();
-    }
-
-    private void Move()
-    {
-        transform.position += transform.up * _speed * Time.deltaTime;
+        if (!_isExploded) Explode();
     }
 
     private void Explode()
     {
         _isExploded = true;
-           var explosionPosition = transform.position;
+        var explosionPosition = transform.position;
         Physics.OverlapSphere(explosionPosition, _radius)
             .Where(x => CanSeeObject(explosionPosition, x.transform.position))
             .Select(x => x.GetComponent<IDamagable>())

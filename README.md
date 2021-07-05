@@ -8,7 +8,6 @@
 - Changable weapon
 - Client side inventory
 - Dynamic weapon visual
-- Fix missile collision
 
 ### Map system:  
 ~ One map instance for client and server
