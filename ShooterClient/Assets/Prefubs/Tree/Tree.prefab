@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6749611345025710474}
   - component: {fileID: 4093641132811702247}
   - component: {fileID: 5906725605277265016}
+  - component: {fileID: 198738506261254822}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Untagged
@@ -89,6 +90,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &198738506261254822
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5596525164635256705}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.6989836
+  m_Height: 14.138815
+  m_Direction: 1
+  m_Center: {x: -0.075280905, y: 7.0694075, z: -0.0012947321}
 --- !u!21 &-6537179461614168389
 Material:
   serializedVersion: 6
@@ -97,7 +112,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Optimized Leaf Material
-  m_Shader: {fileID: 4800000, guid: 8d2bb70cbf9db8d4da26e15b26e74248, type: 3}
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -134,7 +149,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ac324807c76c13047af76df650835f9a, type: 3}
+        m_Texture: {fileID: 2800000, guid: d17da9e5bea98fa4cb73c3a11318bd45, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadowTex:
@@ -162,11 +185,15 @@ Material:
     - _Cull: 2
     - _Cutoff: 0.3
     - _DstBlend: 0
+    - _EnvironmentReflections: 1
+    - _GlossMapScale: 0
     - _Glossiness: 0.5
     - _GlossinessSource: 0
+    - _GlossyReflections: 0
     - _HueVariationKwToggle: 0
     - _Metallic: 0
     - _NormalMapKwToggle: 0
+    - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _ShadowOffsetScale: 1
@@ -174,6 +201,7 @@ Material:
     - _Shininess: 0
     - _Smoothness: 0.5
     - _SmoothnessSource: 0
+    - _SmoothnessTextureChannel: 0
     - _SpecSource: 0
     - _SpecularHighlights: 1
     - _SquashAmount: 1
@@ -184,6 +212,7 @@ Material:
     - _TranslucencyViewDependency: 0.7
     - _TwoSided: 2
     - _WindQuality: 0
+    - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
