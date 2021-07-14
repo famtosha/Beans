@@ -6,7 +6,7 @@ Client-Server game
 ## ToDo:  
 
 ### Iteam system:  
-- Changable weapon
+- Changeable weapon
 - Client side inventory
 - Dynamic weapon visual
 
