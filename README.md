@@ -1,4 +1,5 @@
 # Beans  
+Client-Server game
 
 ## Unity version: 2019.4.23f1  
 

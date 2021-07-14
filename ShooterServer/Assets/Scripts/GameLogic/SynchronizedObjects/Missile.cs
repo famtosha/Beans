@@ -40,12 +40,12 @@ public class Missile : MonoBehaviour
     {
         _isExploded = true;
         var explosionPosition = transform.position;
-        Physics.OverlapSphere(explosionPosition, _radius)
-            .Where(x => CanSeeObject(explosionPosition, x.transform.position))
-            .Select(x => x.GetComponent<IDamagable>())
-            .Where(x => x != null)
-            .ToList()
-            .ForEach(x => x.ApplyDamage(1));
+        var hitted = Physics.OverlapSphere(explosionPosition, _radius).ToList();
+        var visible = hitted.Where(x => CanSeeObject(explosionPosition, x.transform.position)).ToList();
+        var iDamagabel = visible.Select(x => x.GetComponent<IDamagable>()).ToList();
+        iDamagabel = iDamagabel.Where(x => x != null).ToList();
+        iDamagabel.ToList()
+        .ForEach(x => x.ApplyDamage(1));
 
         var players = FindObjectOfType<ServerBehaviour>().server.players;
         foreach (var player in players.players)
@@ -71,6 +71,7 @@ public class Missile : MonoBehaviour
 
     private bool CanSeeObject(Vector3 source, Vector3 target)
     {
-        return Physics.RaycastAll(source, target - source, Vector3.Distance(source, target)).Length == 0;
+        var hits = Physics.RaycastAll(source, target - source, Vector3.Distance(source, target));
+        return hits.Length == 1;
     }
 }
